@@ -7,7 +7,7 @@ export default function SignUpPage(){
     return <Container maxWidth="vw">
         <AppBar position="static" sx={{backgroundColor: "#3f51b5"}}>
             <Toolbar>
-                <Typography 
+                <Typography
                     variant="h6"
                     sx={{
                     flexGrow: 1,
@@ -28,7 +28,7 @@ export default function SignUpPage(){
             </Toolbar>
         </AppBar>
 
-        <Box 
+        <Box
             display="flex"
             flexDirection="column"
             alignItems="center"

@@ -19,13 +19,13 @@ import {
   DialogContent,
   DialogActions
 } from "@mui/material";
-import { collection, doc, getDoc, writeBatch } from "firebase/firestore";
+import { collection, doc, setDoc, getDoc, writeBatch } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 //page that in charge of generating flashcards
 export default function Flashcard() {
-  const { isLoaded, isSignedIn, user } = useUser();
+  const {isLoaded, isSignedIn, user} = useUser();
   const [flashcards, setFlashcards] = useState([]);
   const [flipped, setFlipped] = useState([]);
   const [text, setText] = useState("");
@@ -64,11 +64,13 @@ export default function Flashcard() {
     }
 
     const batch = writeBatch(db);
-    const userDocRef = doc(collection(db, "users", user.id));
+    // const userDocRef = doc(collection(db, "users", user.id));
+    const userDocRef = doc(db, 'users', user.id);
     const docSnap = await getDoc(userDocRef);
 
     if (docSnap.exists()) {
       const collections = docSnap.data().flashcards || [];
+
       if (collections.find((f) => f.name === name)) {
         alert("Flashcards collection with the same name already exists.");
         return;
@@ -81,6 +83,7 @@ export default function Flashcard() {
     }
 
     const colRef = collection(userDocRef, name);
+
     flashcards.forEach((flashcard) => {
       const cardDocRef = doc(colRef);
       batch.set(cardDocRef, flashcard);
