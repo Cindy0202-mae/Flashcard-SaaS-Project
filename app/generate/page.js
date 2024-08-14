@@ -145,9 +145,9 @@ export default function Flashcard() {
                             position: "relative",
                             width: "100%",
                             height: "200px",
-                            boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2",
+                            boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
                             transform: flipped[index]
-                              ? "rotateY(180deg"
+                              ? "rotateY(180deg)"
                               : "rotateY(0deg)",
                           },
                           "& > div > div": {
@@ -162,20 +162,22 @@ export default function Flashcard() {
                             boxSizing: "border-box",
                           },
                           "& > div > div:nth-of-type(2)": {
-                            transition: "rotateY(180deg)",
+                            transform: "rotateY(180deg)",
                           },
                         }}
                       >
-                        <div>
-                          <Typography variant="h5" component="div">
-                            {flashcard.front}
-                          </Typography>
-                        </div>
-                        <div>
-                          <Typography variant="h5" component="div">
-                            {flashcard.back}
-                          </Typography>
-                        </div>
+                  <div>
+                    <div>
+                      <Typography variant="h5" component="div">
+                        {flashcard.front}
+                      </Typography>
+                    </div>
+                  <div>
+                      <Typography variant="h5" component="div">
+                        {flashcard.back}
+                      </Typography>
+                    </div>
+                  </div>
                       </Box>
                     </CardContent>
                   </CardActionArea>
