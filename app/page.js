@@ -7,7 +7,7 @@ import Head from "next/head";
 // please check the container to be 100% 
 export default function Home() {
   return (
-    <Container maxWidth="100vm"> 
+    <Container maxWidth="100vw"> 
       <Head>
         <title>Flashcard SaaS</title>
         <meta name = "description" content="Create flashcard from your text"></meta>
@@ -17,8 +17,8 @@ export default function Home() {
         <Toolbar>
           <Typography variant="h6" style={{flexGrow: 1}}>Flashcard SaaS</Typography>
           <SignedOut>
-            <Button color="inherit">LogIn</Button>
-            <Button color="inherit">SignUp</Button>
+            <Button color="inherit" href="sign-in">LogIn</Button>
+            <Button color="inherit" href="sign-up">SignUp</Button>
           </SignedOut>
           <SignedIn>
             <UserButton />
