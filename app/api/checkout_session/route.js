@@ -8,7 +8,7 @@ const formatAmountForStripe = (amount) => {
 };
 
 export async function GET(req) {
-  const searchParams = req.nextUrl.searchParams()
+  const searchParams = req.nextUrl.searchParams
   const session_id = searchParams.get('session_id')
 
   try {
@@ -41,10 +41,10 @@ export async function POST(req) {
       },
     ],
     success_url: `${req.headers.get(
-      "origin"
+      'origin',
     )}/result?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${req.headers.get(
-      "origin"
+      'origin',
     )}/result?session_id={CHECKOUT_SESSION_ID}`,
   };
   const checkoutSession = await stripe.checkout.sessions.create(params);
