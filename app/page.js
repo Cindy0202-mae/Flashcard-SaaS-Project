@@ -4,10 +4,34 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
 import Head from "next/head";
 
-// please check the container to be 100% 
+// please check the container to be 100%
 export default function Home() {
+  const handleSubmit = async () => {
+    const checkoutSession = await fetch('/api/checkout_session', {
+      method: 'POST',
+      headers: {
+        origin: 'http://localhost:3000'
+      },
+    })
+
+    const checkoutSessionJson = await checkoutSession.json()
+
+    if (checkoutSession.statusCode === 500) {
+      console.error(checkoutSession.message);
+      return
+    }
+
+    const stripe = await getStripe()
+    const {error} = await stripe.redirectToCheckout({
+      sessionId: checkoutSessionJson.id,
+    })
+
+    if (error) {
+      console.warn(error.message);
+    }
+  }
   return (
-    <Container maxWidth="100vw"> 
+    <Container maxWidth="100vw">
       <Head>
         <title>Flashcard SaaS</title>
         <meta name = "description" content="Create flashcard from your text"></meta>
@@ -40,7 +64,7 @@ export default function Home() {
           Get Started
         </Button>
       </Box>
-      <Box sx = {{my: 6}}> 
+      <Box sx = {{my: 6}}>
         <Typography variant="h4" gutterBottom>Features</Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
@@ -80,7 +104,7 @@ export default function Home() {
               <Typography variant="h6" gutterBottom>$5 / Month</Typography>
               <Typography>
                 { ' ' }
-                Access to basic flashcard features and limited storage. 
+                Access to basic flashcard features and limited storage.
               </Typography>
               <Button variant="contained" color="primary" sx={{mt: 2}}>
                 Choose Basic
@@ -100,7 +124,7 @@ export default function Home() {
                 { ' ' }
                 Unlimited flashcards and storage, with priority support.
               </Typography>
-              <Button variant="contained" color="primary" sx={{mt: 2}}>
+              <Button variant="contained" color="primary" sx={{mt: 2}} onClick={handleSubmit}>
                 Choose Pro
               </Button>
             </Box>
