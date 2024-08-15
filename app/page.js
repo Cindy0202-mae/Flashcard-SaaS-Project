@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import getStripe from "@/utils/get-stripe";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
@@ -14,6 +15,7 @@ export default function Home() {
       },
     })
 
+    console.log(checkoutSession);
     const checkoutSessionJson = await checkoutSession.json()
 
     if (checkoutSession.statusCode === 500) {
