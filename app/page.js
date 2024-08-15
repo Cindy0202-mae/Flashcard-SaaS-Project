@@ -77,8 +77,11 @@ export default function Home() {
           my: 4,
         }}
       >
-        <Typography variant="h2" gutterBottom>
-          Welcome to Flashcard SaaS
+        <Typography variant="h3" gutterBottom>
+          Elevate your business with
+        </Typography>
+        <Typography variant="h3" gutterBottom>
+        NovaCopy AI Flashcards
         </Typography>
         <Typography variant="h5" gutterBottom>
           {" "}
@@ -91,48 +94,98 @@ export default function Home() {
                     </div>
                   </button>
       </Box>
-      <Box sx={{ my: 6 }}>
+      <Box sx={{ my: 2, textAlign: "center" }}>
         <Typography variant="h4" gutterBottom>
           Features
         </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Easy Text Input
-            </Typography>
-            <Typography>
-              {" "}
-              Simply input your text and let our software do the rest. Creating
-              flashcards has never been easier.
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Smart Flashcards
-            </Typography>
-            <Typography>
-              {" "}
-              Our AI intelligently breaks down your text into concise
-              flashcards, perfect for studying.
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Accessible Anywhere
-            </Typography>
-            <Typography>
-              {" "}
-              Access your flashcards from any device, at any time. Study on the
-              go with ease.
-            </Typography>
-          </Grid>
-        </Grid>
-      </Box>
+        <Grid container spacing={4} justifyContent="center">
+    <Grid item xs={12} sm={6} md={4}>
+      <CardContainer className="inter-var">
+        <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-auto rounded-xl p-6 border">
+          <CardItem
+            translateZ="50"
+            className="text-xl font-bold text-neutral-600 dark:text-white"
+          >
+            Easy Text Input
+          </CardItem>
+          <CardItem
+            as="p"
+            translateZ="60"
+            className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+          >
+            Simply input your text and let our software do the rest. Creating
+            flashcards has never been easier.
+          </CardItem>
+          <CardItem
+            translateZ="100"
+            rotateX={20}
+            rotateZ={-10}
+            className="w-full mt-4"
+          >
+          </CardItem>
+        </CardBody>
+      </CardContainer>
+    </Grid>
+    <Grid item xs={12} sm={6} md={4}>
+      <CardContainer className="inter-var">
+        <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-auto rounded-xl p-6 border">
+          <CardItem
+            translateZ="50"
+            className="text-xl font-bold text-neutral-600 dark:text-white"
+          >
+            Smart Flashcards
+          </CardItem>
+          <CardItem
+            as="p"
+            translateZ="60"
+            className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+          >
+            Our AI intelligently breaks down your text into concise
+            flashcards, perfect for studying.
+          </CardItem>
+          <CardItem
+            translateZ="100"
+            rotateX={20}
+            rotateZ={-10}
+            className="w-full mt-4"
+          >
+          </CardItem>
+        </CardBody>
+      </CardContainer>
+    </Grid>
+    <Grid item xs={12} sm={6} md={4}>
+      <CardContainer className="inter-var">
+        <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-auto rounded-xl p-6 border">
+          <CardItem
+            translateZ="50"
+            className="text-xl font-bold text-neutral-600 dark:text-white"
+          >
+            Accessible Anywhere
+          </CardItem>
+          <CardItem
+            as="p"
+            translateZ="60"
+            className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+          >
+            Access your flashcards from any device, at any time. Study on the
+          </CardItem>
+          <CardItem
+            translateZ="100"
+            rotateX={20}
+            rotateZ={-10}
+            className="w-full mt-4"
+          >
+          </CardItem>
+        </CardBody>
+      </CardContainer>
+    </Grid>
+  </Grid>
+  </Box>
       <Box sx={{ my: 3, textAlign: "center" }}>
         <Typography variant="h4" gutterBottom>
           Pricing
         </Typography>
-        <Grid container spacing={4}>
+        <Box sx={{ display: "flex", gap: "14px", justifyContent: "center"}}>
           <Grid item xs={12} md={6}>
             <CardContainer className="inter-var">
               <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
@@ -145,7 +198,7 @@ export default function Home() {
                 <CardItem
                   as="p"
                   translateZ="60"
-                  className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+                  className="text-neutral-500 text-md max-w-sm mt-2 dark:text-neutral-300"
                 >
                   $5 / Month
                 </CardItem>
@@ -157,13 +210,21 @@ export default function Home() {
                   Access to basic flashcard features and limited storage.
                 </CardItem>
                 <div className="flex justify-between items-center mt-20">
-                  <button className="p-[3px] relative" onClick={handleSubmit}>
+          <CardItem
+            translateZ={20}
+            translateX={-40}
+            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+          >
+            Try now →
+          </CardItem>
+            <button className="p-[3px] relative" translateZ={20}
+            translateX={40} onClick={handleSubmit}>
                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
                     <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
                       Choose Basic
                     </div>
                   </button>
-                </div>
+        </div>
               </CardBody>
             </CardContainer>
           </Grid>
@@ -179,7 +240,7 @@ export default function Home() {
                 <CardItem
                   as="p"
                   translateZ="60"
-                  className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+                  className="text-neutral-500 text-md max-w-sm mt-2 dark:text-neutral-300"
                 >
                   $10 / Month
                 </CardItem>
@@ -191,17 +252,25 @@ export default function Home() {
                   Unlimited flashcards and storage, with priority support.
                 </CardItem>
                 <div className="flex justify-between items-center mt-20">
-                  <button className="p-[3px] relative" onClick={handleSubmit}>
+          <CardItem
+            translateZ={20}
+            translateX={-40}
+            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+          >
+            Try now →
+          </CardItem>
+            <button className="p-[3px] relative" translateZ={20}
+            translateX={40} onClick={handleSubmit}>
                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
                     <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
                       Choose Pro
                     </div>
                   </button>
-                </div>
+        </div>
               </CardBody>
             </CardContainer>
           </Grid>
-        </Grid>
+        </Box>
       </Box>
     </Container>
   );

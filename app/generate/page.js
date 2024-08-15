@@ -125,7 +125,7 @@ export default function Flashcard() {
             fullWidth
           >
             {" "}
-            Submit
+            See the Magic!
           </Button>
         </Paper>
       </Box>
