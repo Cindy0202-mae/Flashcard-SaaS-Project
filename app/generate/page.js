@@ -19,6 +19,8 @@ import {
   DialogContent,
   DialogActions
 } from "@mui/material";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
 import { collection, doc, setDoc, getDoc, writeBatch } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -124,8 +126,12 @@ export default function Flashcard() {
             onClick={handleSubmit}
             fullWidth
           >
-            {" "}
-            See the Magic!
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+                <div className="px-8 py-2 rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+                {" "}
+                See the Magic!
+                <FontAwesomeIcon icon={faWandMagicSparkles} className="text-white text-xl pl-2" />
+                </div>
           </Button>
         </Paper>
       </Box>
@@ -188,7 +194,7 @@ export default function Flashcard() {
               </Grid>
             ))}
           </Grid>
-          <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+          <Box sx={{ my: 4, display: "flex", justifyContent: "center" }}>
             <Button variant="contained" color="secondary" onClick={handleOpen}>
               Save
             </Button>

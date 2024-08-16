@@ -2,6 +2,7 @@
 import { useUser } from '@clerk/nextjs'
 import { useEffect, useState } from 'react'
 import { Container, Grid, Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import Navbar from '../../components/Navbar'
 
 import { collection, doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from "@/firebase";
@@ -36,7 +37,9 @@ export default function Flashcard() {
   }
 
   return (
-    <Container maxWidth="md">
+    <>
+      <Navbar />
+      <Container maxWidth="md">
       <Grid container spacing={3} sx={{ mt: 4 }}>
         {flashcards.map((flashcard, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
@@ -52,6 +55,7 @@ export default function Flashcard() {
           </Grid>
         ))}
       </Grid>
-    </Container>
+      </Container>
+      </>
   )
 }
