@@ -59,22 +59,6 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  .custom-font {
-    @apply font-sans;
-  }
-
-  .custom-bg {
-    @apply bg-background;
-  }
-
-  .custom-text {
-    @apply text-foreground;
-  }
+body {
+  background: var(--background);
 }

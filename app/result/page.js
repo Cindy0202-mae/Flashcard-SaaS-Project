@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Navbar from "../../components/Navbar"
 import getStripe from '@/utils/get-stripe'
 import { useSearchParams } from 'next/navigation'
 import { Typography, Container, Box } from '@mui/material'
@@ -65,6 +66,8 @@ const ResultPage = () => {
   }
 
   return (
+    <>
+    <Navbar />
     <Container maxWidth="100vw"
       sx={{
         textAlign: 'center',
@@ -91,6 +94,7 @@ const ResultPage = () => {
         </>
       )}
     </Container>
+    </>
   )
 }
 
