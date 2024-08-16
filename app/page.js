@@ -8,10 +8,9 @@ import {
   Container,
   Grid,
   Toolbar,
-  Typography,
+  Typography, 
 } from "@mui/material";
 import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
-
 import Head from "next/head";
 
 // please check the container to be 100%
@@ -51,7 +50,6 @@ export default function Home() {
         ></meta>
         cod
       </Head>
-
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
