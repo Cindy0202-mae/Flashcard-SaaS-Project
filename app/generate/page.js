@@ -52,7 +52,15 @@ export default function Flashcard() {
     }));
   };
   const handleOpen = () => {
+    if (!isSignedIn) {
+      alert("Login first to save flashcards!");
+      router.push({
+        pathname: '/sign-up',
+        query: { redirect: router.asPath }, // save the current URL as a query parameter
+      });
+    } else {
     setOpen(true);
+  }
   };
 
   const handleClose = () => {

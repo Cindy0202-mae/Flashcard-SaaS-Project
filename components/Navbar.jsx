@@ -68,6 +68,7 @@ export default function Navbar() {
             </div>
             <Button
             onClick={() => (window.location.href = "/generate")}
+            sx={{ marginX: 3}}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
                 <div className="px-4 py-1 rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
