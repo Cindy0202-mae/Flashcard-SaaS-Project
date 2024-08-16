@@ -1,5 +1,5 @@
 "use client";
-
+import Navbar from "../../components/Navbar"
 import { db } from "@/firebase";
 import { useUser } from "@clerk/nextjs";
 import {
@@ -96,6 +96,8 @@ export default function Flashcard() {
     router.push("/flashcards");
   };
   return (
+    <>
+    <Navbar />
     <Container maxWidth="md">
       <Box
         sx={{
@@ -216,5 +218,6 @@ export default function Flashcard() {
         </DialogActions>
       </Dialog>
     </Container>
+    </>
   );
 }

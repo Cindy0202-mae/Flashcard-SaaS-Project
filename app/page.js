@@ -2,12 +2,8 @@
 import getStripe from "@/utils/get-stripe";
 import Navbar from '../components/Navbar'
 import {
-  AppBar,
   Box,
-  Button,
   Container,
-  Grid,
-  Toolbar,
   Typography,
 } from "@mui/material";
 // import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
@@ -16,7 +12,7 @@ import Head from "next/head";
 
 // please check the container to be 100%
 // export default function Home({Component, pageProps}) {
-export default function Home({Component, pageProps}) {
+export default function Home() {
   const handleSubmit = async () => {
     const checkoutSession = await fetch("/api/checkout_session", {
       method: "POST",
