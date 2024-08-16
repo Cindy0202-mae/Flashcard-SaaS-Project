@@ -68,7 +68,6 @@ export default function Navbar() {
             </div>
             <Button
             onClick={() => (window.location.href = "/generate")}
-            className="ml-4"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
                 <div className="px-4 py-1 rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
@@ -78,10 +77,10 @@ export default function Navbar() {
           </Button>
           </div>
           <SignedOut>
-            <Button color="inherit" href="sign-in">
+            <Button sx={{ color: 'white' }} href="sign-in">
               LogIn
             </Button>
-            <Button color="inherit" href="sign-up">
+            <Button sx={{ color: 'white' }} href="sign-up">
               SignUp
             </Button>
           </SignedOut>
