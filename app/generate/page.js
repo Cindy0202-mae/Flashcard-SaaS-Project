@@ -171,11 +171,9 @@ export default function Flashcard() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h4">Generate Flashcards</Typography>
+          <h4 className="text-4xl text-neutral-600">Generate Flashcards</h4>
           <Paper sx={{ p: 4, width: "100%" }}>
-            <Typography variant="h6">
-              Choose a position that you want to prepare for an interview!
-            </Typography>
+          <p className="text-xl text-neutral-600">Choose a position that you want to prepare for an interview!</p>
             <Grid
               direction="row"
               spacing={2}
@@ -192,9 +190,7 @@ export default function Flashcard() {
                 />
               ))}
             </Grid>
-            <Typography variant="h6">
-              You can&apos;t find a position?
-            </Typography>
+            <p className="text-xl text-neutral-600">You can&apos;t find a position?</p>
             <TextField
               value={position}
               onChange={(e) => setPosition(e.target.value)}
