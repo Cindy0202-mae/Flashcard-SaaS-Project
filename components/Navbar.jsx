@@ -3,15 +3,15 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import {
   Button
 } from "@mui/material";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faSquare, faPeopleGroup, faHammer } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faHouse, faSquare, faPeopleGroup, faHammer } from '@fortawesome/free-solid-svg-icons';
 import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs';
 
 const navigation = [
   { name: 'Home', href: '/', icon: "faHouse", current: true },
   { name: 'Flashcards', href: '/flashcards', icon: "faSquare", current: false },
-  { name: 'Team', href: '/team', icon: "faPeopleGroup", current: false },
-  { name: 'Works', href: '/works', icon: "faHammer", current: false }
+  // { name: 'Team', href: '/team', icon: "faPeopleGroup", current: false },
+  // { name: 'Works', href: '/works', icon: "faHammer", current: false }
 ];
 
 // const iconMapping = {

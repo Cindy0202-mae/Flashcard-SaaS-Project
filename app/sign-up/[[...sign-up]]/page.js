@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { SignIn, SignUp } from "@clerk/nextjs";
 import { Box } from "@mui/material";
@@ -8,14 +8,20 @@ import Link from "next/link";
 
 export default function SignUpPage(){
   const router = useRouter();
-  const { redirect } = router.query; // fetch the previous URL from query parameter
+  const [redirect, setRedirect] = useState('/');
+  // const { redirect = '/' } = router.query;
+
+
+  // checks if router is ready
+  useEffect(() => {
+    if (router.isReady) {
+      const { redirect } = router.query;
+      setRedirect(redirect || '/');
+    }
+  }, [router.isReady, router.query]);
 
   const handleSignUpComplete = () => {
-    if (redirect) {
-      router.push(redirect); // redirect to the previous page
-    } else {
-      router.push('/'); // default redirect destination
-    }
+    router.push(redirect);
   };
 
     return (
