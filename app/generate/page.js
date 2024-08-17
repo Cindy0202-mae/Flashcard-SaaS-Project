@@ -173,7 +173,9 @@ export default function Flashcard() {
         >
           <h4 className="text-4xl text-neutral-600">Generate Flashcards</h4>
           <Paper sx={{ p: 4, width: "100%" }}>
-          <p className="text-xl text-neutral-600">Choose a position that you want to prepare for an interview!</p>
+            <p className="text-xl text-neutral-600">
+              Choose a position that you want to prepare for an interview!
+            </p>
             <Grid
               direction="row"
               spacing={2}
@@ -190,7 +192,9 @@ export default function Flashcard() {
                 />
               ))}
             </Grid>
-            <p className="text-xl text-neutral-600">You can&apos;t find a position?</p>
+            <p className="text-xl text-neutral-600 mb-3">
+              You can&apos;t find a position?
+            </p>
             <TextField
               value={position}
               onChange={(e) => setPosition(e.target.value)}
@@ -231,7 +235,7 @@ export default function Flashcard() {
         ) : (
           flashcards.length > 0 && (
             <Box sx={{ mt: 4 }}>
-              <Typography variant="h5">Flashcards Preview</Typography>
+              <h4 className="text-2xl text-neutral-600">Flashcards Preview</h4>
               <Grid container spacing={3}>
                 {flashcards.map((flashcard, index) => (
                   <Grid item xs={12} sm={6} md={4} key={index}>
@@ -246,8 +250,9 @@ export default function Flashcard() {
                                 transformStyle: "preserve-3d",
                                 position: "relative",
                                 width: "100%",
-                                height: "200px",
-                                boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
+                                height: "400px",
+                                boxShadow:
+                                  "0 4px 8px 0 rgba(195, 84, 203, 0.8)",
                                 transform: flipped[index]
                                   ? "rotateY(180deg)"
                                   : "rotateY(0deg)",
@@ -265,19 +270,16 @@ export default function Flashcard() {
                               },
                               "& > div > div:nth-of-type(2)": {
                                 transform: "rotateY(180deg)",
+                                overflow: "scroll",
                               },
                             }}
                           >
                             <div>
                               <div>
-                                <Typography variant="h5" component="div">
-                                  {flashcard.front}
-                                </Typography>
+                              <p className="text-xl text-neutral-600">{flashcard.front}</p>
                               </div>
                               <div>
-                                <Typography variant="h5" component="div">
-                                  {flashcard.back}
-                                </Typography>
+                              <p className="text-md text-neutral-600">{flashcard.back}</p>
                               </div>
                             </div>
                           </Box>

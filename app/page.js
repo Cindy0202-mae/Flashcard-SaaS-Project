@@ -3,9 +3,8 @@ import getStripe from "@/utils/get-stripe";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Box, Container, Typography } from "@mui/material";
-// import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
-
 import Head from "next/head";
+// import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 
 // please check the container to be 100%
 // export default function Home({Component, pageProps}) {
@@ -47,7 +46,6 @@ export default function Home() {
             name="description"
             content="AI-Powered Prep for Your Tech Interview Success"
           ></meta>
-          cod
         </Head>
         <Box
           sx={{
