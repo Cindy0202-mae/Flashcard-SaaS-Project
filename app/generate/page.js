@@ -18,6 +18,7 @@ import {
   DialogContentText,
   DialogContent,
   DialogActions,
+  Chip,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
@@ -34,10 +35,12 @@ import { useState } from "react";
 //page that in charge of generating flashcards
 export default function Flashcard() {
   const { isLoaded, isSignedIn, user } = useUser();
+  const [selectedChip, setSelectedChip] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [flashcards, setFlashcards] = useState([]);
   const [flipped, setFlipped] = useState([]);
-  const [text, setText] = useState("");
+  // const [text, setText] = useState("");
+  const [position, setPosition] = useState("");
   const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -48,12 +51,13 @@ export default function Flashcard() {
 
     fetch("api/generate", {
       method: "POST",
-      body: text,
+      body: position,
     })
       .then((res) => res.json())
       .then((data) => {
         setFlashcards(data);
         setIsLoading(false);
+        console.log(position, "this is position"); // currently position is undefined, so the same random question keeps being generated
       })
       .catch((error) => {
         console.error("Error fetching flashcards:", error);
@@ -61,6 +65,12 @@ export default function Flashcard() {
         console.log(flashcards, "flashcards");
       });
   };
+
+  const handleClick = (label) => {
+    const newSelectedChip = selectedChip === label ? null : label;
+    setSelectedChip(newSelectedChip);
+    setPosition(newSelectedChip);
+  }
 
   const handleCardClick = (id) => {
     setFlipped((prev) => ({
@@ -120,6 +130,28 @@ export default function Flashcard() {
     handleClose();
     router.push("/flashcards");
   };
+
+const labels = ["Frontend Developer",
+                "Backend Developer",
+                "Full Stack Developer",
+                "DevOps Engineer",
+                "Data Scientist",
+                "Data Engineer",
+                "Cloud Engineer",
+                "Infrastructure Engineer",
+                "Network Administrator",
+                "Cybersecurity Specialist",
+                "Machine Learning Engineer",
+                "Software Architect",
+                "Database Administrator",
+                "Project Manager",
+                "Product Manager",
+                "Business Analyst",
+                "QA Engineer",
+                "UX/UI Designer",
+                "Mobile App Developer",
+                "Systems Analyst"];
+
   return (
     <>
       <Navbar />
@@ -135,13 +167,35 @@ export default function Flashcard() {
         >
           <Typography variant="h4">Generate Flashcards</Typography>
           <Paper sx={{ p: 4, width: "100%" }}>
+            <Typography variant="h6">
+              Choose a position that you want to prepare for an interview!
+            </Typography>
+            <Grid
+              direction="row"
+              spacing={2}
+              sx={{ my: 2, width: "100%", flexWrap: "wrap" }}
+            >
+              {labels.map((label, index) => (
+                <Chip
+                  key={index}
+                  label={label}
+                  color="primary"
+                  sx={{ mb: 1 }}
+                  variant={selectedChip.includes(label) ? "filled" : "outlined"}
+            onClick={() => handleClick(label)}
+                />
+              ))}
+            </Grid>
+            <Typography variant="h6">
+              You can&apos;t find a position?
+            </Typography>
             <TextField
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              label="Enter text"
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+              label="Enter position name"
               fullWidth
               multiline
-              rows={4}
+              rows={1}
               variant="outlined"
               sx={{
                 mb: 2,
@@ -155,11 +209,11 @@ export default function Flashcard() {
             >
               <div className="px-8 py-2 rounded-[6px] group transition duration-200 text-white hover:bg-transparent">
                 {" "}
-                See the Magic!
-                <FontAwesomeIcon
+                Let&apos;s Go!
+                {/* <FontAwesomeIcon
                   icon={faWandMagicSparkles}
                   className="text-white text-xl pl-2"
-                />
+                /> */}
               </div>
             </Button>
           </Paper>

@@ -59,10 +59,10 @@ export default function Home() {
         }}
       >
         <Typography variant="h3" gutterBottom className="text-neutral-600">
-          Elevate your business with
+        Master Tech Interviews,
         </Typography>
         <Typography variant="h3" gutterBottom className="text-neutral-600">
-          NovaCopy AI Flashcards
+        One Flashcard at a Time
         </Typography>
         <Typography variant="h5" gutterBottom className="text-neutral-600">
           {" "}
