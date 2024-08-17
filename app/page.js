@@ -13,12 +13,13 @@ import Head from "next/head";
 // please check the container to be 100%
 // export default function Home({Component, pageProps}) {
 export default function Home() {
-  const handleSubmit = async () => {
+  const handleSubmit = async (amount) => {
     const checkoutSession = await fetch("/api/checkout_session", {
       method: "POST",
       headers: {
         origin: "http://localhost:3000",
       },
+      body: JSON.stringify({ amount })
     });
 
     console.log(checkoutSession);
@@ -162,7 +163,7 @@ export default function Home() {
                 className="p-[3px] relative"
                 translatez={20}
                 translatex={40}
-                onClick={handleSubmit}
+                onClick={() => handleSubmit(5)}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
                 <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
@@ -192,7 +193,7 @@ export default function Home() {
                 className="p-[3px] relative"
                 translatez={20}
                 translatex={40}
-                onClick={handleSubmit}
+                onClick={() => handleSubmit(10)}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
                 <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
