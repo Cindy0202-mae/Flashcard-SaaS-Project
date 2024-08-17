@@ -14,12 +14,12 @@ const navigation = [
   { name: 'Works', href: '/works', icon: "faHammer", current: false }
 ];
 
-const iconMapping = {
-  faHouse: faHouse,
-  faSquare: faSquare,
-  faPeopleGroup: faPeopleGroup,
-  faHammer: faHammer,
-};
+// const iconMapping = {
+//   faHouse: faHouse,
+//   faSquare: faSquare,
+//   faPeopleGroup: faPeopleGroup,
+//   faHammer: faHammer,
+// };
 
 
 function classNames(...classes) {
@@ -41,7 +41,7 @@ export default function Navbar() {
             </DisclosureButton>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex flex-shrink-0 items-center">
+              <div className="flex items-center">
               {/* <img
                 alt="Your Company"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
@@ -57,10 +57,10 @@ export default function Navbar() {
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
                       item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium',
+                      'inline-flex items-center rounded-md px-3 py-2 text-sm font-medium',
                     )}
                   >
-                    <FontAwesomeIcon icon={iconMapping[item.icon]} className="pr-2" />
+                    {/* <FontAwesomeIcon icon={iconMapping[item.icon]} className="pr-2" /> */}
                     {item.name}
                   </a>
                 ))}
@@ -69,12 +69,10 @@ export default function Navbar() {
             <Button
             onClick={() => (window.location.href = "/generate")}
             sx={{ marginX: 3}}
+            className="btn bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg px-4 py-1 text-white transition duration-200 hover:bg-transparent focus:outline-none active:outline-none"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
-                <div className="px-4 py-1 rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
                 {" "}
                 + Create
-                </div>
           </Button>
           </div>
           <SignedOut>

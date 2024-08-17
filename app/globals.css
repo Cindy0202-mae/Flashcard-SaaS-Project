@@ -63,6 +63,10 @@ body {
   background: var(--background);
 }
 
+.btn {
+  text-decoration: none;
+}
+
 /* loading spinner */
 .sk-folding-cube {
   margin: 20px auto;
