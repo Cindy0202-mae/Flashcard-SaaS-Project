@@ -69,8 +69,12 @@ export default function Flashcard() {
   const handleClick = (label) => {
     const newSelectedChip = selectedChip === label ? null : label;
     setSelectedChip(newSelectedChip);
-    setPosition(newSelectedChip);
-  }
+    if (newSelectedChip === null) {
+      setPosition("");
+    } else {
+      setPosition(newSelectedChip);
+    }
+  };
 
   const handleCardClick = (id) => {
     setFlipped((prev) => ({
@@ -131,26 +135,28 @@ export default function Flashcard() {
     router.push("/flashcards");
   };
 
-const labels = ["Frontend Developer",
-                "Backend Developer",
-                "Full Stack Developer",
-                "DevOps Engineer",
-                "Data Scientist",
-                "Data Engineer",
-                "Cloud Engineer",
-                "Infrastructure Engineer",
-                "Network Administrator",
-                "Cybersecurity Specialist",
-                "Machine Learning Engineer",
-                "Software Architect",
-                "Database Administrator",
-                "Project Manager",
-                "Product Manager",
-                "Business Analyst",
-                "QA Engineer",
-                "UX/UI Designer",
-                "Mobile App Developer",
-                "Systems Analyst"];
+  const labels = [
+    "Frontend Developer",
+    "Backend Developer",
+    "Full Stack Developer",
+    "DevOps Engineer",
+    "Data Scientist",
+    "Data Engineer",
+    "Cloud Engineer",
+    "Infrastructure Engineer",
+    "Network Administrator",
+    "Cybersecurity Specialist",
+    "Machine Learning Engineer",
+    "Software Architect",
+    "Database Administrator",
+    "Project Manager",
+    "Product Manager",
+    "Business Analyst",
+    "QA Engineer",
+    "UX/UI Designer",
+    "Mobile App Developer",
+    "Systems Analyst",
+  ];
 
   return (
     <>
@@ -181,8 +187,8 @@ const labels = ["Frontend Developer",
                   label={label}
                   color="primary"
                   sx={{ mb: 1 }}
-                  variant={selectedChip.includes(label) ? "filled" : "outlined"}
-            onClick={() => handleClick(label)}
+                  variant={selectedChip === label ? "filled" : "outlined"}
+                  onClick={() => handleClick(label)}
                 />
               ))}
             </Grid>

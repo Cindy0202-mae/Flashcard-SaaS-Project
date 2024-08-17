@@ -1,6 +1,7 @@
 "use client";
 import getStripe from "@/utils/get-stripe";
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import {
   Box,
   Container,
@@ -66,7 +67,7 @@ export default function Home() {
         </Typography>
         <Typography variant="h5" gutterBottom className="text-neutral-600">
           {" "}
-          The easiest way to make flashcards from text
+          AI-Powered Prep for Your Tech Interview Success
         </Typography>
         <button
           className="p-[3px] mt-5 relative"
@@ -205,6 +206,7 @@ export default function Home() {
         </Box>
       </Box>
     </Container>
+    <Footer />
     </>
   );
 }
