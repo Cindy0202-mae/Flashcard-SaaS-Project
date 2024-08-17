@@ -1,41 +1,35 @@
+"use client";
 import React from "react";
+import { useRouter } from 'next/navigation';
 import { SignIn, SignUp } from "@clerk/nextjs";
-import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Navbar from "../../../components/Navbar";
 import Link from "next/link";
 
 export default function SignUpPage(){
-    return <Container maxWidth="vw">
-        <AppBar position="static" sx={{backgroundColor: "#3f51b5"}}>
-            <Toolbar>
-                <Typography 
-                    variant="h6"
-                    sx={{
-                    flexGrow: 1,
-                    }}
-                >
-                    Flashcard SaaS
-                </Typography>
-                <Button color="inherit">
-                    <Link href="/sign-in" passHref>
-                        Login
-                    </Link>
-                </Button>
-                <Button color="inherit">
-                    <Link href="/sign-up" passHref>
-                        Sing Up
-                    </Link>
-                </Button>
-            </Toolbar>
-        </AppBar>
+  const router = useRouter();
+  const { redirect } = router.query; // fetch the previous URL from query parameter
 
-        <Box 
+  const handleSignUpComplete = () => {
+    if (redirect) {
+      router.push(redirect); // redirect to the previous page
+    } else {
+      router.push('/'); // default redirect destination
+    }
+  };
+
+    return (
+      <>
+      <Navbar />
+        <Box
             display="flex"
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
+            sx={{ marginTop: 4 }}
         >
-            <Typography variant="h4">Sign Up</Typography>
-            <SignUp />
+            <SignUp onSignUpComplete={handleSignUpComplete} />
         </Box>
-    </Container>
+        </>
+    )
 }

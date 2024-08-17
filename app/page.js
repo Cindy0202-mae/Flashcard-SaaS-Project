@@ -1,26 +1,23 @@
 "use client";
 import getStripe from "@/utils/get-stripe";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Navbar from '../components/Navbar'
 import {
-  AppBar,
   Box,
-  Button,
   Container,
-  Grid,
-  Toolbar,
-  Typography, 
+  Typography,
 } from "@mui/material";
-import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
-import Head from "next/head";
+// import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 
 // please check the container to be 100%
+// export default function Home({Component, pageProps}) {
 export default function Home() {
-  const handleSubmit = async () => {
+  const handleSubmit = async (amount) => {
     const checkoutSession = await fetch("/api/checkout_session", {
       method: "POST",
       headers: {
         origin: "http://localhost:3000",
       },
+      body: JSON.stringify({ amount })
     });
 
     console.log(checkoutSession);
@@ -40,167 +37,164 @@ export default function Home() {
       console.warn(error.message);
     }
   };
-  return (
-    <Container maxWidth="100vw">
-      <Head>
-        <title>Flashcard SaaS</title>
-        <meta
-          name="description"
-          content="Create flashcard from your text"
-        ></meta>
-        cod
-      </Head>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Flashcard SaaS
-          </Typography>
-          <SignedOut>
-            <Button color="inherit" href="sign-in">
-              LogIn
-            </Button>
-            <Button color="inherit" href="sign-up">
-              SignUp
-            </Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
 
+  return (
+    <>
+    <Navbar />
+    <Container maxWidth="100vw">
       <Box
         sx={{
           textAlign: "center",
-          my: 4,
+          my: 10,
         }}
       >
-        <Typography variant="h2" gutterBottom>
-          Welcome to Flashcard SaaS
+        <Typography variant="h3" gutterBottom className="text-neutral-600">
+          Elevate your business with
         </Typography>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h3" gutterBottom className="text-neutral-600">
+          NovaCopy AI Flashcards
+        </Typography>
+        <Typography variant="h5" gutterBottom className="text-neutral-600">
           {" "}
           The easiest way to make flashcards from text
         </Typography>
-        <button className="p-[3px] relative" sx={{ mt: 2 }} onClick={() => window.location.href = "/generate"}>
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
-                    <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
-                    Get Started
-                    </div>
-                  </button>
+        <button
+          className="p-[3px] mt-5 relative"
+          sx={{ mt: 2 }}
+          onClick={() => (window.location.href = "/generate")}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+          <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+            Get Started
+          </div>
+        </button>
       </Box>
-      <Box sx={{ my: 6 }}>
-        <Typography variant="h4" gutterBottom>
+      <Box sx={{ my: 10, textAlign: "center" }}>
+        <Typography variant="h4" gutterBottom className="text-neutral-600">
           Features
         </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "14px",
+            textAlign: "center",
+            justifyContent: "center",
+            mt: "30px",
+          }}
+        >
+          <a
+            href="#"
+            className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          >
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               Easy Text Input
-            </Typography>
-            <Typography>
-              {" "}
+            </h5>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
               Simply input your text and let our software do the rest. Creating
               flashcards has never been easier.
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
+            </p>
+          </a>
+          <a
+            href="#"
+            className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          >
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               Smart Flashcards
-            </Typography>
-            <Typography>
-              {" "}
+            </h5>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
               Our AI intelligently breaks down your text into concise
               flashcards, perfect for studying.
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
+            </p>
+          </a>
+          <a
+            href="#"
+            className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          >
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               Accessible Anywhere
-            </Typography>
-            <Typography>
-              {" "}
+            </h5>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
               Access your flashcards from any device, at any time. Study on the
-              go with ease.
-            </Typography>
-          </Grid>
-        </Grid>
+            </p>
+          </a>
+        </Box>
       </Box>
-      <Box sx={{ my: 3, textAlign: "center" }}>
-        <Typography variant="h4" gutterBottom>
+      <Box sx={{ my: 6, textAlign: "center" }}>
+        <Typography variant="h4" gutterBottom className="text-neutral-600">
           Pricing
         </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <CardContainer className="inter-var">
-              <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-                <CardItem
-                  translateZ="50"
-                  className="text-xl font-bold text-neutral-600 dark:text-white"
-                >
-                  Basic
-                </CardItem>
-                <CardItem
-                  as="p"
-                  translateZ="60"
-                  className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-                >
-                  $5 / Month
-                </CardItem>
-                <CardItem
-                  as="p"
-                  translateZ="60"
-                  className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-                >
-                  Access to basic flashcard features and limited storage.
-                </CardItem>
-                <div className="flex justify-between items-center mt-20">
-                  <button className="p-[3px] relative" onClick={handleSubmit}>
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
-                    <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
-                      Choose Basic
-                    </div>
-                  </button>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "14px",
+            textAlign: "center",
+            justifyContent: "center",
+            mt: "30px",
+          }}
+        >
+          <a
+            href="#"
+            className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          >
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Basic
+            </h5>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              $5 / Month
+            </p>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              Access to basic flashcard features and limited storage.
+            </p>
+            <div className="flex justify-between items-center mt-20">
+              <p className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white">
+                Try now →
+              </p>
+              <button
+                className="p-[3px] relative"
+                translatez={20}
+                translatex={40}
+                onClick={() => handleSubmit(5)}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+                <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+                  Choose Basic
                 </div>
-              </CardBody>
-            </CardContainer>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <CardContainer className="inter-var">
-              <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-                <CardItem
-                  translateZ="50"
-                  className="text-xl font-bold text-neutral-600 dark:text-white"
-                >
-                  Pro
-                </CardItem>
-                <CardItem
-                  as="p"
-                  translateZ="60"
-                  className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-                >
-                  $10 / Month
-                </CardItem>
-                <CardItem
-                  as="p"
-                  translateZ="60"
-                  className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-                >
-                  Unlimited flashcards and storage, with priority support.
-                </CardItem>
-                <div className="flex justify-between items-center mt-20">
-                  <button className="p-[3px] relative" onClick={handleSubmit}>
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
-                    <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
-                      Choose Pro
-                    </div>
-                  </button>
+              </button>
+            </div>
+          </a>
+          <a
+            href="#"
+            className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          >
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Pro
+            </h5>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              $10 / Month
+            </p>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              Unlimited flashcards and storage, with priority support.
+            </p>
+            <div className="flex justify-between items-center mt-20">
+              <p className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white">
+                Try now →
+              </p>
+              <button
+                className="p-[3px] relative"
+                translatez={20}
+                translatex={40}
+                onClick={() => handleSubmit(10)}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+                <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+                  Choose Pro
                 </div>
-              </CardBody>
-            </CardContainer>
-          </Grid>
-        </Grid>
+              </button>
+            </div>
+          </a>
+        </Box>
       </Box>
     </Container>
+    </>
   );
 }

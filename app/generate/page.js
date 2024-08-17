@@ -1,5 +1,5 @@
 "use client";
-
+import Navbar from "../../components/Navbar";
 import { db } from "@/firebase";
 import { useUser } from "@clerk/nextjs";
 import {
@@ -17,15 +17,24 @@ import {
   DialogTitle,
   DialogContentText,
   DialogContent,
-  DialogActions
+  DialogActions,
 } from "@mui/material";
-import { collection, doc, setDoc, getDoc, writeBatch } from "firebase/firestore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
+import {
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+  writeBatch,
+} from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 //page that in charge of generating flashcards
 export default function Flashcard() {
-  const {isLoaded, isSignedIn, user} = useUser();
+  const { isLoaded, isSignedIn, user } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
   const [flashcards, setFlashcards] = useState([]);
   const [flipped, setFlipped] = useState([]);
   const [text, setText] = useState("");
@@ -34,13 +43,23 @@ export default function Flashcard() {
   const router = useRouter();
 
   const handleSubmit = async () => {
+    setIsLoading(true);
+    console.log(setIsLoading, "isLoading");
+
     fetch("api/generate", {
       method: "POST",
       body: text,
     })
       .then((res) => res.json())
-      .then((data) => setFlashcards(data));
-    console.log(flashcards, "flashcards");
+      .then((data) => {
+        setFlashcards(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching flashcards:", error);
+        setIsLoading(false);
+        console.log(flashcards, "flashcards");
+      });
   };
 
   const handleCardClick = (id) => {
@@ -50,7 +69,15 @@ export default function Flashcard() {
     }));
   };
   const handleOpen = () => {
-    setOpen(true);
+    if (!isSignedIn) {
+      alert("Login first to save flashcards!");
+      router.push({
+        pathname: "/sign-up",
+        query: { redirect: router.asPath }, // save the current URL as a query parameter
+      });
+    } else {
+      setOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -65,7 +92,7 @@ export default function Flashcard() {
 
     const batch = writeBatch(db);
     // const userDocRef = doc(collection(db, "users", user.id));
-    const userDocRef = doc(db, 'users', user.id);
+    const userDocRef = doc(db, "users", user.id);
     const docSnap = await getDoc(userDocRef);
 
     if (docSnap.exists()) {
@@ -94,6 +121,8 @@ export default function Flashcard() {
     router.push("/flashcards");
   };
   return (
+<>
+      <Navbar />
     <Container maxWidth="md">
       <Box
         sx={{
@@ -192,23 +221,33 @@ export default function Flashcard() {
             <Button variant="contained" color="secondary" onClick={handleOpen}>
               Save
             </Button>
-          </Box>
-        </Box>
-      )}
+              </Box>
+            </Box>
+          )
+        }
 
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Save Flashcards</DialogTitle>
-        <DialogContent>
-        <DialogContentText>
-          Please enter a name for your flashcards collection
-        </DialogContentText>
-        <TextField autoFocus margin='dense' label="collection Name" type="text" fullWidth value={name} onChange={(e) => setName(e.target.value)} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={saveFlashcards}>Save</Button>
-        </DialogActions>
-      </Dialog>
-    </Container>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Save Flashcards</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please enter a name for your flashcards collection
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              label="collection Name"
+              type="text"
+              fullWidth
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={saveFlashcards}>Save</Button>
+          </DialogActions>
+        </Dialog>
+      </Container>
+    </>
   );
 }
