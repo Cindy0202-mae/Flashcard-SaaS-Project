@@ -8,8 +8,6 @@ import {
 } from "@mui/material";
 // import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 
-import Head from "next/head";
-
 // please check the container to be 100%
 // export default function Home({Component, pageProps}) {
 export default function Home() {
@@ -44,14 +42,6 @@ export default function Home() {
     <>
     <Navbar />
     <Container maxWidth="100vw">
-      <Head>
-        <title>Flashcard SaaS</title>
-        <meta
-          name="description"
-          content="Create flashcard from your text"
-        ></meta>
-        cod
-      </Head>
       <Box
         sx={{
           textAlign: "center",

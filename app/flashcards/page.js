@@ -46,7 +46,7 @@ export default function Flashcard() {
             <Card>
               <CardActionArea onClick={() => handleCardClick(flashcard.name)}>
                 <CardContent>
-                  <Typography variant="h5" component="div">
+                  <Typography variant="h6" component="div">
                     {flashcard.name}
                   </Typography>
                 </CardContent>
