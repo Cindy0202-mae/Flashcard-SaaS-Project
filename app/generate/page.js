@@ -47,22 +47,27 @@ export default function Flashcard() {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    console.log(setIsLoading, "isLoading");
 
-    fetch("api/generate", {
+    fetch("/api/generate", {
       method: "POST",
       body: position,
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to generate flashcards.");
+        }
+
+        return data;
+      })
       .then((data) => {
         setFlashcards(data);
         setIsLoading(false);
-        console.log(position, "this is position"); // currently position is undefined, so the same random question keeps being generated
       })
       .catch((error) => {
         console.error("Error fetching flashcards:", error);
         setIsLoading(false);
-        console.log(flashcards, "flashcards");
       });
   };
 

@@ -31,20 +31,62 @@ Return in the following json format:
 `
 
 export async function POST(req) {
-    const openai = new OpenAI()
-    const data = await req.text()
+    try {
+        if (!process.env.GROQ_API_KEY) {
+            return NextResponse.json(
+                {error: "GROQ_API_KEY is not configured."},
+                {status: 500}
+            )
+        }
 
-    const completion = await openai.chat.completions.create({
-        messages: [
-            {role: 'system', content: systemPrompt},
-            {role: 'user', content: data},
-        ],
-        model: "gpt-4o",
-        response_format: {type: 'json_object'},
-    })
+        const data = await req.text()
 
-    console.log(completion.choices[0].message.content);
-    const flashcards = JSON.parse(completion.choices[0].message.content)
+        if (!data.trim()) {
+            return NextResponse.json(
+                {error: "Please choose or enter a position before generating flashcards."},
+                {status: 400}
+            )
+        }
 
-    return NextResponse.json(flashcards.flashcards)
+        const groq = new OpenAI({
+            apiKey: process.env.GROQ_API_KEY,
+            baseURL: "https://api.groq.com/openai/v1",
+        })
+
+        const completion = await groq.chat.completions.create({
+            messages: [
+                {role: "system", content: systemPrompt},
+                {role: "user", content: data},
+            ],
+            model: "llama-3.1-8b-instant",
+            response_format: {type: "json_object"},
+            temperature: 0.3,
+        })
+
+        const content = completion.choices[0]?.message?.content
+        if (!content) {
+            return NextResponse.json(
+                {error: "Groq returned an empty response."},
+                {status: 502}
+            )
+        }
+
+        const flashcards = JSON.parse(content)
+
+        if (!Array.isArray(flashcards.flashcards)) {
+            return NextResponse.json(
+                {error: "Groq returned an unexpected response format."},
+                {status: 502}
+            )
+        }
+
+        return NextResponse.json(flashcards.flashcards)
+    } catch (error) {
+        console.error("Error generating flashcards:", error)
+
+        return NextResponse.json(
+            {error: error.message || "Failed to generate flashcards."},
+            {status: error.status || 500}
+        )
+    }
 }
